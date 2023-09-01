@@ -1,7 +1,6 @@
 #include <string>
 #include <unordered_map>
 #include <stdexcept>
-#include <vector>
 #include <memory>
 
 #include "od_array.h"

@@ -7,10 +7,30 @@
 
 #include <cstdint>
 #include <memory>
+#include <set>
 #include <string>
 #include <variant>
 
 namespace colite {
+
+class DeviceInformation {
+public:
+    std::set<int> allowed_baudrates;
+    std::string vendor_name;
+    int vendor_number;
+    std::string product_name;
+    int product_number;
+    int revision_number;
+    std::string order_code;
+    bool simple_boot_up_master;
+    bool simple_boot_up_slave;
+    bool granularity;
+    bool dynamic_channels_supported;
+    bool group_messaging;
+    int nr_of_RXPDO;
+    int nr_of_TXPDO;
+    bool LSS_supported;
+};  // class DeviceInformation
 
 enum DataType {
     UNKNOWN = 0x0,
@@ -31,7 +51,6 @@ enum DataType {
     UNSIGNED64 = 0x1B
 };
 DataType toDataType(int value);
-//int sizeOfDataType(DataType dt);
 
 using DataValue = std::variant<
         int8_t, int16_t, int32_t, int64_t,
