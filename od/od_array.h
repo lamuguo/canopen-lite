@@ -18,17 +18,7 @@ public:
 
     virtual ObjectType getType() { return ARRARY_OBJ; }
     virtual Variable* get_variable(int subindex);
-    virtual void add_member(int subindex, std::unique_ptr<Variable> var);
-
-    Variable* operator[](const std::string& subindex);
-
-    inline size_t size() const { return subindices.size(); }
-
-    std::vector<int> keys() const;
-
-    bool operator==(const Array& other) const;
-
-    void add_member(std::unique_ptr<Variable> variable);
+    virtual void add_member(std::unique_ptr<Variable> var);
 
     // Member variables
     void* parent;

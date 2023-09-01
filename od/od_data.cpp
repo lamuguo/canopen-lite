@@ -36,13 +36,6 @@ DataType toDataType(int value) {
         default: return UNKNOWN;
     }
 }
-//
-//int sizeOfDataType(DataType dt) {
-//    switch(dt) {
-//        case BOOLEAN:
-//    }
-//
-//}
 
 // TODO(lamuguo): use uint64_t instead.
 Data to_int_data(DataType type, int64_t value) {
@@ -61,9 +54,12 @@ Data to_int_data(DataType type, int64_t value) {
 }
 
 bool operator==(const Data& lhs, const Data& rhs) {
-    return lhs.getType() == rhs.getType() && lhs.getValue() == rhs.getValue();
+    return lhs.getDataType() == rhs.getDataType() && lhs.getValue() == rhs.getValue();
 }
 
+/*
+ * Code for debugging below.
+ */
 // Convert DataType enum to string
 std::string dataTypeToString(DataType type) {
     switch (type) {
@@ -89,10 +85,10 @@ std::string dataTypeToString(DataType type) {
 
 // Overload the operator<< for Data:
 std::ostream& operator<<(std::ostream& os, const Data& data) {
-    os << "Data { type: " << dataTypeToString(data.getType()) << ", value: ";
+    os << "Data { type: " << dataTypeToString(data.getDataType()) << ", value: ";
 
     // Print the correct value based on the type
-    switch (data.getType()) {
+    switch (data.getDataType()) {
         case BOOLEAN: os << data.get<bool>(); break;
         case INTEGER8: os << data.get<uint8_t>(); break;
         case INTEGER16: os << data.get<int16_t>(); break;
@@ -111,7 +107,5 @@ std::ostream& operator<<(std::ostream& os, const Data& data) {
     os << " }";
     return os;
 }
-
-
 
 }  // namespace colite

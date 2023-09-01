@@ -46,7 +46,7 @@ public:
     Data(DataType type, DataValue value) : type(type), value(value) {}
     Data(const Data& other) : type(other.type), value(other.value) {}
 
-    DataType getType() const { return type; }
+    DataType getDataType() const { return type; }
     const DataValue& getValue() const { return value; }
 
     template <typename T>
@@ -85,7 +85,7 @@ public:
 
     virtual ObjectType getType() = 0;
     virtual Variable* get_variable(int subindex) = 0;
-    virtual void add_member(int subindex, std::unique_ptr<Variable> var) = 0;
+    virtual void add_member(std::unique_ptr<Variable> var) = 0;
 
     BaseObj *parent = nullptr;
 };

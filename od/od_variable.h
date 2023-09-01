@@ -5,6 +5,7 @@
 #ifndef CANOPEN_LITE_OD_VARIABLE_H
 #define CANOPEN_LITE_OD_VARIABLE_H
 
+#include <assert.h>
 #include <cstring>  // For std::memcpy
 #include <map>
 #include <set>
@@ -76,18 +77,11 @@ public:
 
     virtual ObjectType getType() { return VARIABLE_OBJ; }
     virtual Variable* get_variable(int subindex);
-    virtual void add_member(int subindex, std::unique_ptr<Variable> var) {
+    virtual void add_member(std::unique_ptr<Variable> var) {
         // Do nothing
-        // TODO(lamuguo): assert here?
+        assert(false);
     }
     int size() const;
-
-    bool operator==(const Variable& other) const;
-
-    bool isWritable() const;
-    bool isReadable() const;
-    void addValueDescription(int value, const std::string& descr);
-    void addBitDefinition(const std::string& name, const std::vector<int>& bits);
 
     // Member variables
     // TODO(lamuguo): remove parent.
