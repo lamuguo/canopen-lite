@@ -47,6 +47,7 @@ public:
     bool relative = false;
     std::string parameter_raw;
     Data parameter_value;
+    // TODO(lamuguo): Do we need data_type, we've one in default_value.data_type.
     DataType data_type = UNKNOWN;
     std::string access_type = "rw";
     std::string description = "";
