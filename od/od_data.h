@@ -86,8 +86,6 @@ public:
     virtual ObjectType getType() = 0;
     virtual Variable* get_variable(int subindex) = 0;
     virtual void add_member(std::unique_ptr<Variable> var) = 0;
-
-    BaseObj *parent = nullptr;
 };
 
 }  // namespace colite

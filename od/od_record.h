@@ -21,6 +21,8 @@ public:
     size_t size() const;
 
     // Member variables
+    // TODO(lamuguo): Move parent to BaseObj, and consider whether we need to
+    // use BaseObj*
     void* parent;
     int index;
     std::string name;
