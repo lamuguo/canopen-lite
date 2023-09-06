@@ -40,6 +40,14 @@ class ObjectDictionary {
         throw std::out_of_range("Index " + std::to_string(index) + " not found.");
     }
 
+    Variable* get_variable(int index, int sub_index) {
+        auto it = indices.find(index);
+        if (it == indices.end()) {
+            throw std::out_of_range("Index " + std::to_string(index) + " not found.");
+        }
+        return it->second->get_variable(sub_index);
+    }
+
     // Member variables
     std::unordered_map<int, std::unique_ptr<BaseObj>> indices;
     std::unordered_map<std::string, int> name_to_index;

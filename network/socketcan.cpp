@@ -49,7 +49,7 @@ int SocketCANNetwork::send_message(uint32_t can_id, const std::vector<uint8_t>& 
     return nbytes;
 }
 
-struct can_frame SocketCANNetwork::recv_message() {
+std::unique_ptr<can_frame> SocketCANNetwork::recv_message() {
     fd_set readSet;
     FD_ZERO(&readSet);
     FD_SET(s, &readSet);
@@ -58,27 +58,26 @@ struct can_frame SocketCANNetwork::recv_message() {
     timeout.tv_sec = 1;  // 1 second timeout
     timeout.tv_usec = 0;
 
+    auto frame = std::make_unique<can_frame>();
     int selectRes = select(s + 1, &readSet, NULL, NULL, &timeout);
     if (selectRes == -1) {
         PLOG(ERROR) << "Error during select";
         exit(-1);
     } else if (selectRes == 0) {
         LOG(WARNING) << "No CAN frame received in the allotted time.";
-        struct can_frame emptyFrame = {};
-        return emptyFrame;
+        return std::move(frame);
     }
 
-    struct can_frame frame;
-    int nbytes = read(s, &frame, sizeof(struct can_frame));
+    int nbytes = read(s, frame.get(), sizeof(struct can_frame));
 
     if (nbytes == -1) {
         PLOG(ERROR) << "Error reading CAN frame";
         exit(-1);
     }
 
-    LOG(INFO) << "Received CAN frame with ID: " << std::hex << frame.can_id;
+    LOG(INFO) << "Received CAN frame with ID: " << std::hex << frame->can_id;
 
-    return frame;
+    return std::move(frame);
 }
 
 SocketCANNetwork::~SocketCANNetwork() {

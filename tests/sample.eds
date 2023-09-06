@@ -92,6 +92,7 @@ DataType=0x0007
 AccessType=ro
 PDOMapping=0
 ParameterValue=1
+DefaultValue=4
 
 [1018sub2]
 ParameterName=Product code

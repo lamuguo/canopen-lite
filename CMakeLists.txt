@@ -40,6 +40,8 @@ add_library(canopen_lite_lib
         od/od_data.cpp
         od/eds.cpp
         network/socketcan.cpp
+        node/sdo_client.cpp
+        node/canopen_node.cpp
 )
 target_include_directories(canopen_lite_lib PUBLIC
         .
@@ -56,6 +58,7 @@ enable_testing()
 add_executable(tests
         tests/eds_test.cc
         tests/socketcan_network_test.cpp
+        tests/node_test.cpp
 )
 
 target_include_directories(tests PRIVATE

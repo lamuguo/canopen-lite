@@ -1,7 +1,6 @@
+#include <fmt/core.h>
 #include <gtest/gtest.h>
 #include <string>
-
-#include "fmt/core.h"
 
 #include "od/eds.h"  // Replace with the actual path to your import_od header
 

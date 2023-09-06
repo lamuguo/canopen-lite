@@ -8,6 +8,7 @@
 #include <iostream>
 #include <linux/can.h>
 #include <linux/can/raw.h>
+#include <memory>
 #include <net/if.h>
 #include <sys/socket.h>
 #include <unistd.h>
@@ -26,7 +27,7 @@ public:
     ~SocketCANNetwork();
 
     int send_message(uint32_t can_id, const std::vector<uint8_t>& data);
-    struct can_frame recv_message();
+    std::unique_ptr<can_frame> recv_message();
 
 };  // class SocketCANNetwork
 
