@@ -2,9 +2,7 @@
 // Created by lamuguo on 8/28/23.
 //
 #include "od_variable.h"
-#include <locale>
 #include <codecvt>
-#include <cstring>
 
 namespace colite {
 
